@@ -24,5 +24,15 @@ namespace CodeLines
 		{
 			InitializeComponent();
 		}
+
+		private void OnChoose(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void OnCompute(object sender, RoutedEventArgs e)
+		{
+
+		}
 	}
 }
