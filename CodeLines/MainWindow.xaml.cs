@@ -30,11 +30,14 @@ namespace CodeLines
 
 		private void OnChoose(object sender, RoutedEventArgs e)
 		{
-			FolderBrowserDialog openFileDialog = new FolderBrowserDialog();
-
-			if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			FolderBrowserDialog dialog = new FolderBrowserDialog
 			{
-				PathBox.Text = openFileDialog.SelectedPath;
+				RootFolder = Environment.SpecialFolder.MyComputer
+			};
+
+			if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			{
+				PathBox.Text = dialog.SelectedPath;
 			}
 		}
 
@@ -42,10 +45,11 @@ namespace CodeLines
 		{
 			string path = PathBox.Text;
 
-			LineRecorder l = new LineRecorder(path, ".cs,.xaml,.c,.cpp,.h,.asm,.js,.css");
+			LineRecorder l = new LineRecorder(path, ".cs,.xaml,.c,.cpp,.h,.pas,.frm,.java,.html,.js,.css");
 			l.Compute();
 
-			var format = $"Total: {l.totalLines} \nCode: {l.codeLines} \nEmpty: {l.emptyLines}\n";
+			var format = $"Total: {l.totalLines} \nCode: {l.codeLines} \n" + 
+				$"Empty: {l.emptyLines} \nChar Nums: {l.codeNums}";
 			Rst.AppendText(format);
 		}
 	}

@@ -18,7 +18,7 @@
 		</Grid.ColumnDefinitions>
 		
 		<TextBox x:Name="PathBox" Grid.Column="0" Grid.Row="0" Height="auto" Margin="5"
-				 VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" Text="D:\Code\C#\CodeLines\" />
+				 VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" Text="D:\Code\C#\" />
 		<Button Content="Choose" Grid.Column="1" Grid.Row="0" Margin="5"
 				VerticalAlignment="Center" HorizontalContentAlignment="Center" Click="OnChoose"/>
 		<Button Content="Compute" Grid.Column="2" Grid.Row="0" Margin="5"

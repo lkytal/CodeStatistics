@@ -11,6 +11,7 @@ namespace CodeLines
 	{
 		public readonly string path;
 		public readonly List<string> ext;
+		public int codeNums { private set; get; } = 0;
 		public int codeLines { private set; get; } = 0;
 		public int emptyLines { private set; get; } = 0;
 		public int totalLines => emptyLines + codeLines;
@@ -23,9 +24,9 @@ namespace CodeLines
 			ext = new List<string>(_ext.Split(','));
 		}
 
-		public static (int code, int empty) CountFile(string path)
+		public static (int code, int empty, int charNum) CountFile(string path)
 		{
-			int codeCount = 0, emptyCount = 0;
+			int codeCount = 0, emptyCount = 0, charCount = 0;
 			var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.None);
 			var reader = new StreamReader(fs);
 			reader.BaseStream.Seek(0, SeekOrigin.Begin);
@@ -41,10 +42,11 @@ namespace CodeLines
 				else
 				{
 					codeCount += 1;
+					charCount += strLine.Length;
 				}
 			}
 
-			return (codeCount, emptyCount);
+			return (codeCount, emptyCount, charCount);
 		}
 
 		public void Compute()
@@ -60,10 +62,11 @@ namespace CodeLines
 			{
 				if (file.Extension == item)
 				{
-					(int code, int empty) = CountFile(file.FullName);
+					(int code, int empty, int charNum) = CountFile(file.FullName);
 
 					codeLines += code;
 					emptyLines += empty;
+					codeNums += charNum;
 
 					return;
 				}
@@ -89,10 +92,15 @@ namespace CodeLines
 
 		public void doMap(string currentPath, mapProc proc)
 		{
-			DirectoryInfo currentFolder = new DirectoryInfo(currentPath);
+			var currentFolder = new DirectoryInfo(currentPath);
 
 			foreach (var folder in currentFolder.GetDirectories())
 			{
+				if (folder.Name == @"node_modules")
+				{
+					continue;
+				}
+
 				doMap(folder.FullName, proc);
 			}
 
