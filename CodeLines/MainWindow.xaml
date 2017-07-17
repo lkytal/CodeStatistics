@@ -17,13 +17,13 @@
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 		
-		<TextBox Grid.Column="0" Grid.Row="0" Height="auto" Margin="5"
-				 VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" />
+		<TextBox x:Name="PathBox" Grid.Column="0" Grid.Row="0" Height="auto" Margin="5"
+				 VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" Text="D:\Code\C#\CodeLines\" />
 		<Button Content="Choose" Grid.Column="1" Grid.Row="0" Margin="5"
 				VerticalAlignment="Center" HorizontalContentAlignment="Center" Click="OnChoose"/>
 		<Button Content="Compute" Grid.Column="2" Grid.Row="0" Margin="5"
 		        VerticalAlignment="Center" HorizontalContentAlignment="Center" Click="OnCompute"/>
-		<TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="5" />
+		<TextBox x:Name="Rst" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="5" />
 
 	</Grid>
 </Window>
