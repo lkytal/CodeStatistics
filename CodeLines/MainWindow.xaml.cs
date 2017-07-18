@@ -43,13 +43,16 @@ namespace CodeLines
 
 		private void OnCompute(object sender, RoutedEventArgs e)
 		{
+			const string exts = @".cs,.xaml,.c,.cpp,.h,.pas,.frm,.java,.html,.js,.ts,.css";
+
 			string path = PathBox.Text;
 
-			LineRecorder l = new LineRecorder(path, ".cs,.xaml,.c,.cpp,.h,.pas,.frm,.java,.html,.js,.css");
+			LineRecorder l = new LineRecorder(path, exts);
 			l.Compute();
 
 			var format = $"Total: {l.totalLines} \nCode: {l.codeLines} \n" + 
 				$"Empty: {l.emptyLines} \nChar Nums: {l.codeNums}";
+
 			Rst.AppendText(format);
 		}
 	}

@@ -58,19 +58,13 @@ namespace CodeLines
 
 		public void CountProc(FileInfo file)
 		{
-			foreach (var item in ext)
-			{
-				if (file.Extension == item)
-				{
-					(int code, int empty, int charNum) = CountFile(file.FullName);
+			if (ext.All(item => file.Extension != item)) return;
 
-					codeLines += code;
-					emptyLines += empty;
-					codeNums += charNum;
+			(int code, int empty, int charNum) = CountFile(file.FullName);
 
-					return;
-				}
-			}
+			codeLines += code;
+			emptyLines += empty;
+			codeNums += charNum;
 		}
 	}
 
